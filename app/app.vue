@@ -1,8 +1,5 @@
 <template>
   <div>
-    <NuxtLayout>
-      <NuxtLoadingIndicator />
-      <NuxtPage />
-    </NuxtLayout>
+    <HeroSection />
   </div>
 </template>
