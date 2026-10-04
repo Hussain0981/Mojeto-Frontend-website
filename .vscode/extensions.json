@@ -32,6 +32,8 @@
     "mpontus.tab-cycle",
     "naumovs.color-highlight",
     "WakaTime.vscode-wakatime",
-    "znck.grammarly"
+    "znck.grammarly",
+    "bradlc.vscode-tailwindcss",
+    "esbenp.prettier-vscode"
   ]
 }

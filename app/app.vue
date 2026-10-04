@@ -1,7 +1,7 @@
 <template>
   <div
-    class="h-full w-full object-cover bg-black text-slate-100 overflow-hidden"
-    style="background-image: url('/images/noise.png');"
+    class="bg-black text-slate-100 h-full w-full overflow-hidden object-cover"
+    style="background-image: url('/images/noise.png')"
   >
     <TheHeader />
     <HeroSection />

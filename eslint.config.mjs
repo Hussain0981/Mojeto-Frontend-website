@@ -1,9 +1,4 @@
-import antfu from "@antfu/eslint-config"
+import antfu from '@antfu/eslint-config'
+import prettierConflicts from 'eslint-config-prettier'
 
-export default antfu({
-  stylistic: {
-    indent: 2,
-    quotes: "double",
-    braceStyle: "stroustrup",
-  },
-})
+export default antfu({ stylistic: false }, prettierConflicts)
