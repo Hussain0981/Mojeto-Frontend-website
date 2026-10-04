@@ -1,11 +1,11 @@
 {
-  //  ========= prittier =========
+  // ========= prettier =========
+  "prettier.enable": true,
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "[vue]": {
-    "editor.defaultFormatter": "Vue.volar"
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-
   // ========== Visuals ==========
   "editor.cursorSmoothCaretAnimation": "on",
   "editor.fontFamily": "Input Mono, monospace",
@@ -39,8 +39,8 @@
   "editor.stickyScroll.enabled": true,
   "editor.hover.sticky": true,
   "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "never",
     "source.fixAll": "never",
-    "source.fixAll.eslint": "explicit",
     "source.organizeImports": "never"
   },
   "explorer.confirmDelete": false,
@@ -197,7 +197,6 @@
   "svg.preview.mode": "svg",
 
   // I only use Prettier for manually formatting
-  "prettier.enable": false,
   "prettier.printWidth": 200,
   "prettier.semi": false,
   "prettier.singleQuote": true,
