@@ -9,5 +9,6 @@
     <ImagesSection />
     <TheArt />
     <ImageTarget />
+    <TheFooter />
   </div>
 </template>
