@@ -56,6 +56,46 @@ const rightCocktails = reactive({
 
 onMounted(() => {
   ctx = $gsap.context(() => {
+    $gsap.fromTo(
+      '#cocktail-left-leaf',
+      {
+        x: -70,
+        y: 70,
+        opacity: 0,
+      },
+      {
+        x: 0,
+        y: 0,
+        opacity: 1,
+        duration: 1,
+        scrollTrigger: {
+          trigger: '#cocktail-left-leaf',
+          start: 'top bottom',
+          end: 'end end',
+          scrub: true,
+        },
+      },
+    )
+    $gsap.fromTo(
+      '#cocktail-right-leaf',
+      {
+        x: 70,
+        y: 70,
+        opacity: 0,
+      },
+      {
+        x: 0,
+        y: 0,
+        opacity: 1,
+        duration: 1,
+        scrollTrigger: {
+          trigger: '#cocktail-left-leaf',
+          start: 'top bottom',
+          end: 'end end',
+          scrub: true,
+        },
+      },
+    )
     const tl = $gsap.timeline({
       scrollTrigger: {
         trigger: '#cocktail-section',
@@ -63,19 +103,6 @@ onMounted(() => {
         toggleActions: 'play none none reverse',
       },
     })
-
-    tl.from('#cocktail-left-leaf', {
-      x: -70,
-      y: 70,
-      opacity: 0,
-      duration: 1,
-    }).from(
-      '#cocktail-right-leaf',
-      { x: 70, y: 70, opacity: 0, duration: 1 },
-      '<',
-    )
-    // '<' ka matlab: pichli animation ke saath hi shuru karo
-
     // lists ka halka sa fade-in
     $gsap.from('#cocktail-section .border-b', {
       y: 30,

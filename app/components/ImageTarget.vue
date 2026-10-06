@@ -121,17 +121,6 @@ function prev() {
         </Transition>
       </div>
     </section>
-    <!-- leafs overlays -->
-    <img
-      class="-right-20 -top-20 h-60 absolute rotate-[-20deg]"
-      src="/images/footer-right-leaf.png"
-      alt=""
-    />
-    <img
-      class="-left-10 -bottom-20 h-60 absolute"
-      src="/images/footer-left-leaf.png"
-      alt=""
-    />
   </div>
 </template>
 

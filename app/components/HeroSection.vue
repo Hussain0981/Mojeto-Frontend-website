@@ -1,50 +1,26 @@
 <script lang="ts" setup>
-const { $gsap, $SplitText } = useNuxtApp()
+import { heroAnimation } from '~/gsap/HeroAnimation'
 
-const videoRef = ref<HTMLVideoElement>() // top level par
-let ctx: any
+let cleanup: (() => void) | undefined
+const videoRef = ref<HTMLVideoElement | null>(null)
 
 onMounted(() => {
-  ctx = $gsap.context(() => {
-    // 1) heading animation
-    const split = $SplitText.create('#heading-name', { type: 'chars' })
-    $gsap.from(split.chars, {
-      y: 0,
-      opacity: 0,
-      duration: 0.8,
-      stagger: 0.05,
-      ease: 'power4.out',
-    })
-
-    // 2) hero leaves
-    $gsap.from('#hero-left-leaf', { x: -70, y: 70, duration: 1 })
-    $gsap.from('#hero-right-leaf', { x: 70, y: -70, duration: 1 })
-
-    // 3) video: zoom + neeche jao + stop
-    const DISTANCE = 1 // 2 = 200vh, apne hisab se change karein
-
-    $gsap
-      .timeline({
-        scrollTrigger: {
-          trigger: '#hero-section',
-          start: 'top top',
-          end: '+=100%', // 100vh scroll tak animation chalegi
-          scrub: 1, // scroll ke saath smooth chalega
-          invalidateOnRefresh: true,
-          // markers: true,         // debug ke liye
-          onEnter: () => videoRef.value?.play(),
-          onEnterBack: () => videoRef.value?.play(),
-        },
-      })
-      .to('#video', {
-        scale: 1.2, // thora zoom
-        y: () => window.innerHeight * DISTANCE, // 200vh neeche
-        ease: 'none',
-      })
-  })
+  cleanup = heroAnimation(
+    '#heading-name',
+    '#left .title', // left text
+    '#right p', // right text
+    '#hero-left-leaf', // matches your template id
+    '#hero-right-leaf', // matches your template id
+    '#hero-section', // scroll trigger
+    '#video', // video selector
+    '#video-wrapper',
+    videoRef.value,
+  )
 })
 
-onUnmounted(() => ctx?.revert())
+onBeforeUnmount(() => {
+  cleanup?.()
+})
 </script>
 
 <template>
@@ -56,7 +32,7 @@ onUnmounted(() => ctx?.revert())
       style="height: calc(100vh - 80px)"
     >
       <!-- heading: text, video ke upar -->
-      <div class="relative z-30 grid place-items-center">
+      <div class="relative z-40 grid place-items-center">
         <h1
           id="heading-name"
           class="from-slate-200 via-slate-300 to-slate-700 md:text-[length:14vw] font-bold bg-gradient-to-b bg-clip-text text-[length:18vw] leading-none text-transparent uppercase"
@@ -70,8 +46,8 @@ onUnmounted(() => ctx?.revert())
         class="gap-10 md:gap-0 md:flex-row relative z-30 flex flex-col items-center justify-between"
       >
         <div id="left" class="md:w-60 w-full overflow-hidden">
-          <h3 class="text-sm">Cool Orange Classic</h3>
-          <h2 class="text-3xl font-bold mt-2">
+          <h3 class="text-sm sub-title">Cool Orange Classic</h3>
+          <h2 class="text-3xl font-bold mt-2 title">
             Slip the Sprite <br />
             of Summer
           </h2>
@@ -96,7 +72,7 @@ onUnmounted(() => ctx?.revert())
         <video
           id="video"
           ref="videoRef"
-          class="md:h-[75vh] mx-auto h-[100vh] w-auto max-w-[80%] object-contain mix-blend-screen"
+          class="md:h-[75vh] xl:max-w-[80%] mx-auto h-[100vh] w-auto w-full object-contain mix-blend-screen"
           muted
           loop
           playsinline
@@ -131,4 +107,8 @@ onUnmounted(() => ctx?.revert())
   </div>
 </template>
 
-<style lang="postcss" scoped></style>
+<style lang="postcss" scoped>
+#heading-name :deep(.hero-char) {
+  @apply from-slate-200 via-slate-300 to-slate-700 bg-gradient-to-b bg-clip-text text-transparent;
+}
+</style>
