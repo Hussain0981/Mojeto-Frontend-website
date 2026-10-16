@@ -4,4 +4,7 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ['@nuxtjs/tailwindcss', '@nuxt/eslint'],
   css: ['~/assets/css/main.css'],
+  app: {
+    baseURL: '/Mojeto-Frontend-website/',
+  },
 })
